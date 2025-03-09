@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+.table-cell {
+  @apply border-b border-gray-300 p-3 text-gray-700;
+}
+
+.table-row {
+  @apply odd:bg-white even:bg-gray-100 hover:bg-gray-300;
+}
+
+.table {
+  @apply w-full border-collapse rounded-lg border border-gray-300 shadow-sm;
+}
