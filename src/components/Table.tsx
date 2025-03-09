@@ -44,7 +44,7 @@ export default function Table({
               ))}
 
               {actions && (
-                <td style={{ zIndex: "1" }}>
+                <td className="text-end">
                   <Button onClick={() => actions.edit(row)}>Edit</Button>
 
                   <Button variant="plain" onClick={() => actions.remove(row)}>
