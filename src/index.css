@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+body {
+  background-color: azure;
+}
+
 .table-cell {
   @apply border-b border-gray-300 p-3 text-gray-700;
 }

@@ -19,8 +19,8 @@ export default function Table({
 
   return (
     <div className="overflow-x-auto">
-      <table>
-        <thead>
+      <table className="table">
+        <thead className="bg-gray-100">
           <tr className="text-left uppercase">
             {columns.map((column) => (
               <th

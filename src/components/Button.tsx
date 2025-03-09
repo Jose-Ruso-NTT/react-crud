@@ -17,6 +17,7 @@ const baseClasses = [
   "py-2",
   "text-center",
   "leading-none",
+  "w-fit",
 ];
 
 const basicClasses = [
