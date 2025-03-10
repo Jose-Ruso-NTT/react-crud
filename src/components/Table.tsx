@@ -1,8 +1,8 @@
-import { useValidateTable } from "../hooks/useValidateTable";
+import useValidateTable from "../hooks/useValidateTable";
 import { ActionsTable, Column, DataItem } from "../models";
-import { Button } from "./Button";
+import Button from "./Button";
 
-export default function Table({
+function Table({
   columns,
   data,
   actions,
@@ -39,17 +39,25 @@ export default function Table({
             <tr className="table-row" key={index}>
               {columns.map((column) => (
                 <td className="table-cell" key={column.code}>
-                  {row[column.code]}
+                  {column.code === "id" ? (
+                    <a href={column.code} className="hover:text-blue-600">
+                      {row[column.code]}
+                    </a>
+                  ) : (
+                    row[column.code]
+                  )}
                 </td>
               ))}
 
               {actions && (
                 <td className="text-end">
-                  <Button onClick={() => actions.edit(row)}>Edit</Button>
+                  <div className="flex justify-end gap-4">
+                    <Button onClick={() => actions.edit(row)}>Edit</Button>
 
-                  <Button variant="plain" onClick={() => actions.remove(row)}>
-                    <span style={{ color: "red" }}>Remove</span>
-                  </Button>
+                    <Button variant="plain" onClick={() => actions.remove(row)}>
+                      <span style={{ color: "red" }}>Remove</span>
+                    </Button>
+                  </div>
                 </td>
               )}
             </tr>
@@ -59,3 +67,5 @@ export default function Table({
     </div>
   );
 }
+
+export default Table;

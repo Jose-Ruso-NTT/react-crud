@@ -1,4 +1,4 @@
-export default function Footer() {
+function Footer() {
   const currentDate = new Date();
   return (
     <>
@@ -11,3 +11,5 @@ export default function Footer() {
     </>
   );
 }
+
+export default Footer;

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export type ButtonType = "basic" | "link" | "success" | "plain";
+type ButtonType = "basic" | "link" | "success" | "plain";
 
 const baseClasses = [
   "inline-flex",
@@ -48,7 +48,7 @@ const successClasses = [
 
 const plainClasses = ["border-none", "bg-transparent", "text-black"];
 
-export function Button({
+function Button({
   onClick,
   children,
   variant = "basic",
@@ -77,3 +77,5 @@ export function Button({
     </button>
   );
 }
+
+export default Button;

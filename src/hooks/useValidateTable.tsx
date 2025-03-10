@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Column, DataItem } from "../models";
 
-export function useValidateTable({
+function useValidateTable({
   columns,
   data,
 }: {
@@ -33,3 +33,5 @@ export function useValidateTable({
 
   return { isValid, error };
 }
+
+export default useValidateTable;

@@ -36,7 +36,7 @@ function App() {
       <main className="mx-auto my-7 w-full max-w-[1400px] flex-1 px-4 sm:px-6 lg:px-8">
         <div className="mt-3 flex flex-col gap-4">
           <Button variant="link" onClick={() => alert("Añadir elemento")}>
-            Añadir elemento
+            Añadir Elemento
           </Button>
           <Table columns={columns} data={data} actions={actions} />
         </div>
