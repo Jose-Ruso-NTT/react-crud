@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 
-function useFetch(url: string) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+function useFetch<T>(url: string) {
+  const [data, setData] = useState<T | null>(null);
+  const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          headers: {
+            Authorization: `Bearer mock-token`,
+          },
+        });
         if (!response.ok) {
           throw new Error("Error en la respuesta");
         }
@@ -24,7 +28,7 @@ function useFetch(url: string) {
     fetchData();
   }, [url]);
 
-  return { data, loading, error };
+  return { data, isLoading, error };
 }
 
 export default useFetch;
