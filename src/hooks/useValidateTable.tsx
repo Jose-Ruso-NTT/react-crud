@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Column, DataItem } from "../models";
+import { Column } from "../models";
 
 function useValidateTable({
   columns,
   data,
 }: {
   columns: Column[];
-  data: DataItem[];
+  data: Record<string, any>[];
 }) {
   const [isValid, setIsValid] = useState(true);
   const [error, setError] = useState<string | null>(null);

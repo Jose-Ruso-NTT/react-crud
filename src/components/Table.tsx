@@ -1,5 +1,5 @@
 import useValidateTable from "../hooks/useValidateTable";
-import { ActionsTable, Column, DataItem } from "../models";
+import { ActionsTable, Column } from "../models";
 import Button from "./Button";
 
 function Table({
@@ -8,7 +8,8 @@ function Table({
   actions,
 }: {
   columns: Column[];
-  data: DataItem[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: Record<string, any>[];
   actions?: ActionsTable;
 }) {
   const { isValid, error } = useValidateTable({ columns, data });
