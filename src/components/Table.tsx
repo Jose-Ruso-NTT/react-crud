@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 import useValidateTable from "../hooks/useValidateTable";
 import { ActionsTable, Column } from "../models";
 import Button from "./Button";
@@ -41,9 +42,9 @@ function Table<T extends Record<string, any>>({
               {columns.map((column) => (
                 <td className="table-cell" key={column.code}>
                   {column.code === "id" ? (
-                    <a href={column.code} className="hover:text-blue-600">
+                    <NavLink to={`/car-detail/${row[column.code]}`}>
                       {row[column.code]}
-                    </a>
+                    </NavLink>
                   ) : (
                     row[column.code]
                   )}
