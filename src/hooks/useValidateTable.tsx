@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Column } from "../models";
 
-function useValidateTable({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function useValidateTable<T extends Record<string, any>>({
   columns,
   data,
 }: {
   columns: Column[];
-  data: Record<string, any>[];
+  data: T[];
 }) {
   const [isValid, setIsValid] = useState(true);
   const [error, setError] = useState<string | null>(null);

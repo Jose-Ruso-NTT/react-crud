@@ -2,14 +2,14 @@ import useValidateTable from "../hooks/useValidateTable";
 import { ActionsTable, Column } from "../models";
 import Button from "./Button";
 
-function Table({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function Table<T extends Record<string, any>>({
   columns,
   data,
   actions,
 }: {
   columns: Column[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: Record<string, any>[];
+  data: T[];
   actions?: ActionsTable;
 }) {
   const { isValid, error } = useValidateTable({ columns, data });
