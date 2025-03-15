@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
+import useLocalStorage from "./useLocalStorage";
 
 function useFetch<T>(url: string) {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { getItem } = useLocalStorage();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(url, {
           headers: {
-            Authorization: `Bearer mock-token`,
+            Authorization: `Bearer ${getItem("token")}`,
           },
         });
         if (!response.ok) {
@@ -26,7 +28,7 @@ function useFetch<T>(url: string) {
     };
 
     fetchData();
-  }, [url]);
+  }, [url, getItem]);
 
   return { data, isLoading, error };
 }
