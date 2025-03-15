@@ -69,10 +69,7 @@ function Button({
   };
 
   return (
-    <button
-      onClick={() => onClick()}
-      className={handleButtonTypeClass(variant)}
-    >
+    <button onClick={onClick} className={handleButtonTypeClass(variant)}>
       {children}
     </button>
   );
