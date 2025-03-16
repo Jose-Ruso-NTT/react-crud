@@ -37,33 +37,44 @@ function Table<T extends Record<string, any>>({
           </tr>
         </thead>
         <tbody>
-          {data.map((row, index) => (
-            <tr className="table-row" key={index}>
-              {columns.map((column) => (
-                <td className="table-cell" key={column.code}>
-                  {column.code === "id" ? (
-                    <NavLink to={`/car-detail/${row[column.code]}`}>
-                      {row[column.code]}
-                    </NavLink>
-                  ) : (
-                    row[column.code]
-                  )}
-                </td>
-              ))}
+          {data.length ? (
+            data.map((row, index) => (
+              <tr className="table-row" key={index}>
+                {columns.map((column) => (
+                  <td className="table-cell" key={column.code}>
+                    {column.code === "id" ? (
+                      <NavLink to={`/car-detail/${row[column.code]}`}>
+                        {row[column.code]}
+                      </NavLink>
+                    ) : (
+                      row[column.code]
+                    )}
+                  </td>
+                ))}
 
-              {actions && (
-                <td className="text-end">
-                  <div className="flex justify-end gap-4">
-                    <Button onClick={() => actions.edit(row)}>Edit</Button>
+                {actions && (
+                  <td className="text-end">
+                    <div className="flex justify-end gap-4">
+                      <Button onClick={() => actions.edit(row)}>Edit</Button>
 
-                    <Button variant="plain" onClick={() => actions.remove(row)}>
-                      <span style={{ color: "red" }}>Remove</span>
-                    </Button>
-                  </div>
-                </td>
-              )}
+                      <Button
+                        variant="plain"
+                        onClick={() => actions.remove(row)}
+                      >
+                        <span style={{ color: "red" }}>Remove</span>
+                      </Button>
+                    </div>
+                  </td>
+                )}
+              </tr>
+            ))
+          ) : (
+            <tr className="table-row">
+              <td className="table-cell" colSpan={columns.length + 1}>
+                No hay datos
+              </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>
