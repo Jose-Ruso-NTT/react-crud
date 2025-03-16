@@ -9,7 +9,7 @@ import useLocalStorage from "./useLocalStorage";
  *   data: T | null,
  *   isLoading: boolean,
  *   error: string | null
- * }} An object containing the data, loading state, and any error that occurred.
+ * }} - An object containing the data, loading state, and any error that occurred.
  */
 function useFetch<T>(url: string): {
   data: T | null;
