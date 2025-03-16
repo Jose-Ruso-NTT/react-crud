@@ -12,23 +12,17 @@ const CarDetail = () => {
   const navigate = useNavigate();
   const { formatPrice } = useFormatPrice();
 
-  const {
-    data: cars,
-    isLoading,
-    error,
-    fetchData,
-  } = useApi<Car>({
-    url: `${API_URL}/${API_CONTEXT.cars}/${id}`,
-  });
+  const { data: cars, isLoading, error, fetchData } = useApi<Car>({});
 
   useEffect(() => {
-    fetchData();
+    fetchData({ url: `${API_URL}/${API_CONTEXT.cars}/${id}` });
   }, [fetchData, id]);
 
   const onDeleteCar = async () => {
     try {
       await fetchData({
-        method: "DELETE",
+        url: `${API_URL}/${API_CONTEXT.cars}/${id}`,
+        options: { method: "DELETE" },
       });
       navigate("/");
     } catch (error) {

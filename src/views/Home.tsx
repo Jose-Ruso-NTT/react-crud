@@ -10,15 +10,16 @@ function Home() {
     data: carSummary,
     error,
     isLoading,
-    fetchData,
+    fetchData: getCars,
   } = useApi<CarSummary[]>({
-    url: `${API_URL}/${API_CONTEXT.cars}`,
     defaultValue: [],
   });
 
+  const { fetchData: deleteCar } = useApi<void>({});
+
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    getCars({ url: `${API_URL}/${API_CONTEXT.cars}` });
+  }, [getCars]);
 
   const columns: Column[] = [
     { code: "id", value: "ID" },
@@ -29,7 +30,17 @@ function Home() {
 
   const actions = {
     edit: (item: CarSummary) => alert(`Edit ${item["brand"]} `),
-    remove: (item: CarSummary) => alert(`Remove ${item["id"]} `),
+    remove: async (item: CarSummary) => {
+      try {
+        await deleteCar({
+          url: `${API_URL}/${API_CONTEXT.cars}/${item.id}`,
+          options: { method: "DELETE" },
+        });
+        getCars({ url: `${API_URL}/${API_CONTEXT.cars}` });
+      } catch (error) {
+        console.error("Error deleting car:", error);
+      }
+    },
   };
 
   if (error) {
