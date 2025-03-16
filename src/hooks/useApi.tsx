@@ -6,25 +6,29 @@ interface FetchOptions extends RequestInit {
 }
 
 interface UseApiParams<T> {
-  url: string;
   defaultValue?: T;
+}
+
+interface FetchDataParams {
+  url: string;
+  options?: FetchOptions;
 }
 
 interface UseApiResult<T> {
   data: T | undefined;
   isLoading: boolean;
   error: string | null;
-  fetchData: (options?: FetchOptions) => Promise<void>;
+  fetchData: ({ url, options }: FetchDataParams) => Promise<void>;
 }
 
-function useApi<T>({ url, defaultValue }: UseApiParams<T>): UseApiResult<T> {
+function useApi<T>({ defaultValue }: UseApiParams<T>): UseApiResult<T> {
   const [data, setData] = useState<T | undefined>(defaultValue);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { getItem } = useLocalStorage();
 
   const fetchData = useCallback(
-    async (options: FetchOptions = {}) => {
+    async ({ url, options = {} }: FetchDataParams) => {
       setLoading(true);
       setError(null);
 
@@ -47,7 +51,7 @@ function useApi<T>({ url, defaultValue }: UseApiParams<T>): UseApiResult<T> {
         setLoading(false);
       }
     },
-    [getItem, url]
+    [getItem]
   );
 
   return { data, isLoading, error, fetchData };
