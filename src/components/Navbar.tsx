@@ -17,7 +17,7 @@ function Navbar() {
           <>
             <li className="mx-2">/</li>
             <li>
-              <span className="font-semibold">Car Detail </span>
+              <span className="font-semibold">Detalles </span>
             </li>
           </>
         )}

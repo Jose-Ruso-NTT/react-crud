@@ -1,12 +1,24 @@
+import { useEffect } from "react";
 import Button from "../components/Button";
 import Table from "../components/Table";
-import useFetch from "../hooks/useFetch";
+import { API_CONTEXT, API_URL } from "../env/api-url";
+import useApi from "../hooks/useApi";
 import { CarSummary, Column } from "../models";
 
 function Home() {
-  const { data, error, isLoading } = useFetch<CarSummary[]>(
-    "http://localhost:3000/cars"
-  );
+  const {
+    data: carSummary,
+    error,
+    isLoading,
+    fetchData,
+  } = useApi<CarSummary[]>({
+    url: `${API_URL}/${API_CONTEXT.cars}`,
+    defaultValue: [],
+  });
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const columns: Column[] = [
     { code: "id", value: "ID" },
@@ -23,7 +35,7 @@ function Home() {
   if (error) {
     return <div>{error} </div>;
   }
-  if (!data) {
+  if (!carSummary) {
     return <div>No hay datos disponibles</div>;
   }
 
@@ -37,7 +49,7 @@ function Home() {
         <Button variant="link" onClick={() => alert("Añadir elemento")}>
           Añadir Elemento
         </Button>
-        <Table columns={columns} data={data} actions={actions} />
+        <Table columns={columns} data={carSummary} actions={actions} />
       </div>
     </>
   );
