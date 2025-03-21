@@ -7,7 +7,7 @@ import useApi from "../hooks/useApi";
 import useFormatPrice from "../hooks/useFormatPrice";
 import { Car } from "../models";
 
-const CarDetail = () => {
+function CarDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { formatPrice } = useFormatPrice();
@@ -130,6 +130,6 @@ const CarDetail = () => {
       )}
     </div>
   );
-};
+}
 
 export default CarDetail;

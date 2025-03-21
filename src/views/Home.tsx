@@ -8,8 +8,8 @@ import { CarSummary, Column } from "../models";
 function Home() {
   const {
     data: carSummary,
-    error,
-    isLoading,
+    error: carSummaryError,
+    isLoading: carSummaryIsLoading,
     fetchData: getCars,
   } = useApi<CarSummary[]>({
     defaultValue: [],
@@ -28,29 +28,33 @@ function Home() {
     { code: "total", value: "Total" },
   ];
 
-  const actions = {
-    edit: (item: CarSummary) => alert(`Edit ${item["brand"]} `),
-    remove: async (item: CarSummary) => {
-      try {
-        await deleteCar({
-          url: `${API_URL}/${API_CONTEXT.cars}/${item.id}`,
-          options: { method: "DELETE" },
-        });
-        getCars({ url: `${API_URL}/${API_CONTEXT.cars}` });
-      } catch (error) {
-        console.error("Error deleting car:", error);
-      }
-    },
+  const remove = async (item: CarSummary) => {
+    try {
+      await deleteCar({
+        url: `${API_URL}/${API_CONTEXT.cars}/${item.id}`,
+        options: { method: "DELETE" },
+      });
+      getCars({ url: `${API_URL}/${API_CONTEXT.cars}` });
+    } catch (error) {
+      console.error("Error deleting car:", error);
+    }
   };
 
-  if (error) {
-    return <div>{error} </div>;
+  const edit = (item: CarSummary) => alert(`Edit ${item["brand"]} `);
+
+  const actions = {
+    edit,
+    remove,
+  };
+
+  if (carSummaryError) {
+    return <div>{carSummaryError} </div>;
   }
   if (!carSummary) {
     return <div>No hay datos disponibles</div>;
   }
 
-  if (isLoading) {
+  if (carSummaryIsLoading) {
     return <div>Cargando</div>;
   }
 
