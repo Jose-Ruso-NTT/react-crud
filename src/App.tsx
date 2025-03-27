@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import useLocalStorage from "./hooks/useLocalStorage";
 import CarDetail from "./views/CarDetail";
+import CarForm from "./views/CarForm";
 import Home from "./views/Home";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/car-detail/:id" element={<CarDetail />} />
+              <Route path="/create-car" element={<CarForm />} />
             </Routes>
           </main>
 

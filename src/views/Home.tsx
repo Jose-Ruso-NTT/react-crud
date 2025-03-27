@@ -61,9 +61,10 @@ function Home() {
   return (
     <>
       <div className="mt-3 flex flex-col gap-4">
-        <Button variant="link" onClick={() => alert("Añadir elemento")}>
+        <Button variant="link" href="/create-car">
           Añadir Elemento
         </Button>
+
         <Table columns={columns} data={carSummary} actions={actions} />
       </div>
     </>

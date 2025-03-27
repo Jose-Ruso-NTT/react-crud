@@ -25,6 +25,7 @@ function useApi<T>({ defaultValue }: UseApiParams<T>): UseApiResult<T> {
   const [data, setData] = useState<T | undefined>(defaultValue);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
   const { getItem } = useLocalStorage();
 
   const fetchData = useCallback(

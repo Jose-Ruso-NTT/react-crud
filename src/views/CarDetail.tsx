@@ -56,7 +56,7 @@ function CarDetail() {
               Eliminar
             </Button>
 
-            <Button variant="link" onClick={() => alert("Edit")}>
+            <Button variant="basic" onClick={() => alert("Edit")}>
               Editar
             </Button>
           </div>
