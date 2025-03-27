@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
 import { NavLink } from "react-router";
 
-type ButtonType = "basic" | "link" | "success" | "plain";
+type ButtonType = "submit" | "button" | "reset";
+
+type ButtonVariant = "basic" | "link" | "success" | "plain";
 
 const baseClasses = [
   "inline-flex",
@@ -51,16 +53,36 @@ const successClasses = [
 const plainClasses = ["border-none", "bg-transparent", "text-black"];
 
 type ButtonProps =
-  | { variant: "link"; children: ReactNode; href: string; onClick?: never }
   | {
-      variant?: Exclude<ButtonType, "link">;
+      variant: "link";
+      children: ReactNode;
+      href: string;
+      onClick?: never;
+      type?: never;
+    }
+  | {
+      variant?: Exclude<ButtonVariant, "link">;
+      children: ReactNode;
+      onClick?: never;
+      href?: never;
+      type?: Exclude<ButtonType, "button">;
+    }
+  | {
+      variant?: Exclude<ButtonVariant, "link">;
       children: ReactNode;
       onClick: () => void;
       href?: never;
+      type: "button";
     };
 
-function Button({ variant = "basic", children, onClick, href }: ButtonProps) {
-  const handleButtonTypeClass = (type: ButtonType) => {
+function Button({
+  variant = "basic",
+  children,
+  onClick,
+  href,
+  type = "button",
+}: ButtonProps) {
+  const handleButtonTypeClass = (variant: ButtonVariant) => {
     const classes = {
       basic: basicClasses,
       link: linkClasses,
@@ -68,7 +90,7 @@ function Button({ variant = "basic", children, onClick, href }: ButtonProps) {
       plain: plainClasses,
     };
 
-    return [...baseClasses, ...classes[type]].join(" ");
+    return [...baseClasses, ...classes[variant]].join(" ");
   };
 
   if (variant === "link" && href) {
@@ -80,7 +102,11 @@ function Button({ variant = "basic", children, onClick, href }: ButtonProps) {
   }
 
   return (
-    <button onClick={onClick} className={handleButtonTypeClass(variant)}>
+    <button
+      type={type}
+      onClick={onClick}
+      className={handleButtonTypeClass(variant)}
+    >
       {children}
     </button>
   );
