@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { NavLink } from "react-router";
 
 type ButtonType = "basic" | "link" | "success" | "plain";
 
@@ -37,6 +38,7 @@ const linkClasses = [
   "hover:underline",
   "hover:text-blue-700",
   "focus:ring-blue-400",
+  "w-fit",
 ];
 
 const successClasses = [
@@ -48,15 +50,16 @@ const successClasses = [
 
 const plainClasses = ["border-none", "bg-transparent", "text-black"];
 
-function Button({
-  onClick,
-  children,
-  variant = "basic",
-}: {
-  variant?: ButtonType;
-  children?: ReactNode;
-  onClick: () => void;
-}) {
+type ButtonProps =
+  | { variant: "link"; children: ReactNode; href: string; onClick?: never }
+  | {
+      variant?: Exclude<ButtonType, "link">;
+      children: ReactNode;
+      onClick: () => void;
+      href?: never;
+    };
+
+function Button({ variant = "basic", children, onClick, href }: ButtonProps) {
   const handleButtonTypeClass = (type: ButtonType) => {
     const classes = {
       basic: basicClasses,
@@ -67,6 +70,14 @@ function Button({
 
     return [...baseClasses, ...classes[type]].join(" ");
   };
+
+  if (variant === "link" && href) {
+    return (
+      <NavLink className={handleButtonTypeClass(variant)} to={href}>
+        {children}
+      </NavLink>
+    );
+  }
 
   return (
     <button onClick={onClick} className={handleButtonTypeClass(variant)}>
