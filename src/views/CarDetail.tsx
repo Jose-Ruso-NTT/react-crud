@@ -53,7 +53,7 @@ function CarDetail() {
           </h2>
 
           <div className="flex gap-3">
-            <Button variant="basic" onClick={onDeleteCar}>
+            <Button variant="basic" type="button" onClick={onDeleteCar}>
               Eliminar
             </Button>
 
@@ -97,8 +97,6 @@ function CarDetail() {
                     }`}
                   >
                     <td className="table-cells">
-                      {/* {new Date(detail.registrationDate).toLocaleDateString()} */}
-
                       {formatDate(detail.registrationDate)}
                     </td>
                     <td className="table-cells">{detail.manufactureYear}</td>
