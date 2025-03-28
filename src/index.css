@@ -4,7 +4,35 @@ body {
   background-color: azure;
 }
 
-.table-cell {
+label {
+  @apply text-sm font-semibold text-gray-700;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  @apply mt-1 rounded-md border border-gray-300 p-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500;
+
+  &.ng-invalid.ng-touched {
+    border-left: 5px solid #a94442;
+  }
+}
+
+input[type="checkbox"]:hover {
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  @apply h-5 w-5;
+}
+
+select {
+  @apply block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500;
+}
+
+.table-cells {
   @apply border-b border-gray-300 p-3 text-gray-700;
 }
 

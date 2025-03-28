@@ -26,14 +26,14 @@ function Table<T extends Record<string, any>>({
           <tr className="text-left uppercase">
             {columns.map((column) => (
               <th
-                className="table-cell first-of-type:w-[25%]"
+                className="table-cells first-of-type:w-[25%]"
                 key={column.code}
               >
                 {column.value}
               </th>
             ))}
 
-            {actions && <th className="table-cell text-end">Acciones</th>}
+            {actions && <th className="table-cells text-end">Acciones</th>}
           </tr>
         </thead>
         <tbody>
@@ -41,7 +41,7 @@ function Table<T extends Record<string, any>>({
             data.map((row, index) => (
               <tr className="table-row" key={index}>
                 {columns.map((column) => (
-                  <td className="table-cell" key={column.code}>
+                  <td className="table-cells" key={column.code}>
                     {column.code === "id" ? (
                       <NavLink to={`/car-detail/${row[column.code]}`}>
                         {row[column.code]}
@@ -70,7 +70,7 @@ function Table<T extends Record<string, any>>({
             ))
           ) : (
             <tr className="table-row">
-              <td className="table-cell" colSpan={columns.length + 1}>
+              <td className="table-cells" colSpan={columns.length + 1}>
                 No hay datos
               </td>
             </tr>

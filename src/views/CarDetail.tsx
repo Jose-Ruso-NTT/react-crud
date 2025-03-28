@@ -4,6 +4,7 @@ import Badge from "../components/Badge";
 import Button from "../components/Button";
 import { API_CONTEXT, API_URL } from "../env/api-url";
 import useApi from "../hooks/useApi";
+import formatDate from "../hooks/useFormatDate";
 import useFormatPrice from "../hooks/useFormatPrice";
 import { Car } from "../models";
 
@@ -56,7 +57,7 @@ function CarDetail() {
               Eliminar
             </Button>
 
-            <Button variant="basic" onClick={() => alert("Edit")}>
+            <Button variant="link" href="/edit-car">
               Editar
             </Button>
           </div>
@@ -79,12 +80,12 @@ function CarDetail() {
             <table className="w-full table-auto border-collapse border border-gray-300">
               <thead className="bg-gray-100">
                 <tr className="text-left">
-                  <th className="table-cell">Fecha de registro</th>
-                  <th className="table-cell">Año de fabricación</th>
-                  <th className="table-cell">Precio</th>
-                  <th className="table-cell">Kilometraje</th>
-                  <th className="table-cell">Matrícula</th>
-                  <th className="table-cell">Disponibilidad</th>
+                  <th className="table-cells">Fecha de registro</th>
+                  <th className="table-cells">Año de fabricación</th>
+                  <th className="table-cells">Precio</th>
+                  <th className="table-cells">Kilometraje</th>
+                  <th className="table-cells">Matrícula</th>
+                  <th className="table-cells">Disponibilidad</th>
                 </tr>
               </thead>
               <tbody>
@@ -95,25 +96,27 @@ function CarDetail() {
                       detail.availability ? "bg-gray-50" : "bg-red-50"
                     }`}
                   >
-                    <td className="table-cell">
-                      {new Date(detail.registrationDate).toLocaleDateString()}
+                    <td className="table-cells">
+                      {/* {new Date(detail.registrationDate).toLocaleDateString()} */}
+
+                      {formatDate(detail.registrationDate)}
                     </td>
-                    <td className="table-cell">{detail.manufactureYear}</td>
-                    <td className="table-cell text-right">
+                    <td className="table-cells">{detail.manufactureYear}</td>
+                    <td className="table-cells text-right">
                       {formatPrice({
                         currency: detail.currency,
                         total: detail.price!,
                       })}
                     </td>
-                    <td className="table-cell">
+                    <td className="table-cells">
                       <div className="flex items-center justify-between gap-2">
                         {detail.mileage!.toLocaleString()} km
                         <Badge mileage={detail.mileage!} />
                       </div>
                     </td>
-                    <td className="table-cell">{detail.licensePlate}</td>
+                    <td className="table-cells">{detail.licensePlate}</td>
                     <td
-                      className={`table-cell font-bold ${
+                      className={`table-cells font-bold ${
                         detail.availability ? "bg-green-500" : "bg-red-500"
                       }`}
                     >
